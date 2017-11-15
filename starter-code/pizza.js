@@ -46,27 +46,27 @@ $(function() {
   });
 
   $(".btn-sauce").click(function() {
-
+     // Debes de quitar y poner la clase sauce-white, no active, se hace con toggleClass.
+     // Si a toggleClass le pones 2 clases las intercambia una por la otra y viceversa.
+    $(".sauce").toggleClass("sauce-white");
     $("aside.panel li:nth-child(4)").toggle();
     if ($(this).hasClass("active")) {
-      $(".sauce").hide();
       $(".btn-sauce").removeClass("active");
     } else {
-      $(".sauce").show();
       $(".btn-sauce").addClass("active");
     }
       $("aside.panel strong").text(sumaTotal());
   });
 
-  $(".btn-crust").click(function() {
+   $(".btn-crust").click(function() {
 
     $("aside.panel li:nth-child(5)").toggle();
-
+     // Debes de quitar y poner la clase crust-gluten-free, no active, se hace con toggleClass.
+     // Si a toggleClass le pones 2 clases las intercambia una por la otra y viceversa.
+    ($(".crust").toggleClass("crust-gluten-free"));
     if ($(this).hasClass("active")) {
-      $(".cheese").hide();
       $(".btn-crust").removeClass("active");
     } else {
-      $(".cheese").show();
       $(".btn-crust").addClass("active");
     }
       $("aside.panel strong").text(sumaTotal());
@@ -82,7 +82,8 @@ $(function() {
 
 function sumaTotal() {
   var sum = 10;
-  if ($(".btn-pepperoni").hasClass("active")) {
+  // Te olvidaste de una n en pepperonni
+  if ($(".btn-pepperonni").hasClass("active")) {
     sum += 1;
   }
   if ($(".btn-mushrooms").hasClass("active")) {
@@ -91,10 +92,12 @@ function sumaTotal() {
   if ($(".btn-green-peppers").hasClass("active")) {
     sum += 1;
   }
-  if ($(".btn-sauce").hasClass("active")) {
+  // Hay que cobrarlo cuando no esté activo (white sauce (desactivado sauce normal) = + cara)
+  if (!$(".btn-sauce").hasClass("active")) {
     sum += 3;
   }
-  if ($(".btn-crust").hasClass("active")) {
+  // Hay que cobrarlo cuando no esté activo (Gluten free (desactivado) = + cara)
+  if (!$(".btn-crust").hasClass("active")) {
     sum += 5;
   }
   return sum;
